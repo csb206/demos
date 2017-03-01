@@ -65,17 +65,20 @@ mean(apipop$api00)
 # Here, we sample *districts*, and take all schools in those districts
 
 # Use the `table` function to see which district numbers (dnum) are present in the full dataset
-
+table(apipop$dnum)
+length(unique(apipop$dnum))
 
 # Use the `table` function to see which district numbers are present in apiclus1
-
+table(apiclus1$dnum)
+length(unique(apiclus1$dnum))
 
 # What is the distribution of person weights in this sample?
-
+hist(apiclus1$pw)
+unique(apiclus1$pw)
 
 # Specify multiple cluster designs: try with/without weights/fpc
 # We need to know the primary sampling unit (id) for each observation
-
+dclus<-svydesign(id=~dnum, weights=~pw, fpc=~fpc, data=apiclus1)
 
 # Compute the survey weighted mean for each design specified above
 
